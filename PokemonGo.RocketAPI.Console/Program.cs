@@ -216,12 +216,9 @@ namespace PokemonGo.RocketAPI.Console
                     {
                         Pokemons pokemonList = new Pokemons();
                         pokemonList.ShowDialog();
-                        //Application.Run(new Pokemons());
                     });
                 }
             }
-
-            //Application.Run(new Pokemons());
 
             Logger.SetLogger(new Logging.ConsoleLogger(LogLevel.Info));
             
@@ -236,14 +233,14 @@ namespace PokemonGo.RocketAPI.Console
                 }
                 catch (PtcOfflineException)
                 {
-                    Logger.ColoredConsoleWrite(ConsoleColor.Red, "PTC Servers are probably down OR you credentials are wrong.", LogLevel.Error);
-                    Logger.ColoredConsoleWrite(ConsoleColor.Red, "Trying again in 20 seconds...");
+                    Logger.ColoredConsoleWrite(ConsoleColor.Red, "PTC Server nicht verfügbar ODER Login Informationen falsch.", LogLevel.Error);
+                    Logger.ColoredConsoleWrite(ConsoleColor.Red, "Versuche es erneut in 20 seconds...");
                     Thread.Sleep(20000);
                     new Logic.Logic(new Settings()).Execute().Wait();
                 }
                 catch (AccountNotVerifiedException)
                 {
-                    Logger.ColoredConsoleWrite(ConsoleColor.Red, "Your PTC Account is not activated. Exiting in 10 Seconds.");
+                    Logger.ColoredConsoleWrite(ConsoleColor.Red, "Dein PTC Account ist nicht aktiviert. Verlassen in 10 Seconds.");
                     Thread.Sleep(10000);
                     Environment.Exit(0);
                 }
@@ -279,18 +276,18 @@ namespace PokemonGo.RocketAPI.Console
                             match.Groups[4]));
                 if (gitVersion <= Assembly.GetExecutingAssembly().GetName().Version)
                 {
-                    //ColoredConsoleWrite(ConsoleColor.Yellow, "Awesome! You have already got the newest version! " + Assembly.GetExecutingAssembly().GetName().Version);
+                    Logger.ColoredConsoleWrite(ConsoleColor.Yellow, "Super! Du hast die aktuellste Version! " + Assembly.GetExecutingAssembly().GetName().Version);
                     return;
                 }
 
-                Logger.ColoredConsoleWrite(ConsoleColor.Red, "There is a new Version available: " + gitVersion);
-                Logger.ColoredConsoleWrite(ConsoleColor.Red, "Its recommended to use the newest Version.");
+                Logger.ColoredConsoleWrite(ConsoleColor.Red, "Neue Version ist verfügbar: " + gitVersion);
+                Logger.ColoredConsoleWrite(ConsoleColor.Red, "Wir empfehlen das nutzen der neuen Version.");
                 Logger.ColoredConsoleWrite(ConsoleColor.Red, "Starting in 10 Seconds.");
                 Thread.Sleep(10000);
             }
             catch (Exception)
             {
-                Logger.ColoredConsoleWrite(ConsoleColor.White, "Unable to check for updates now...");
+                Logger.ColoredConsoleWrite(ConsoleColor.White, "Prüfung auf Updates nicht möglich...");
             }
         }
 
@@ -328,7 +325,7 @@ namespace PokemonGo.RocketAPI.Console
             using (var wC = new WebClient())
                 return
                     wC.DownloadString(
-                        "https://raw.githubusercontent.com/Ar1i/PokemonGo-Bot/master/PokemonGo.RocketAPI.Console/Properties/AssemblyInfo.cs");
+                        "https://raw.githubusercontent.com/stefan2812/PokeBot-Test-/master/PokemonGo.RocketAPI.Console/Properties/AssemblyInfo.cs");
         }
     }
     public static class Globals
@@ -366,10 +363,10 @@ namespace PokemonGo.RocketAPI.Console
         public static int telDelay = 5000;
 
         public static int navigation_option = 1;
-        public static bool useluckyegg = true;
-        public static bool useincense = true;
-        public static bool gerNames = false;
+        public static bool useluckyegg = false;
+        public static bool useincense = false;
+        public static bool gerNames = true;
         public static bool pokeList = true;
-        public static bool keepPokemonsThatCanEvolve = true;
+        public static bool keepPokemonsThatCanEvolve = false;
     }
 }

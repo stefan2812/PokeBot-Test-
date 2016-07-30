@@ -47,7 +47,7 @@ namespace PokemonGo.RocketAPI.Console
         private async void Execute()
         {
             EnabledButton(false);
-            textBox1.Text = "Reloading Pokemon list.";
+            textBox1.Text = "Aktualisiere Pokemon Übersicht.";
 
             client = new Client(ClientSettings);
 
@@ -108,7 +108,6 @@ namespace PokemonGo.RocketAPI.Console
                         .Select(f => f.Candy)
                         .First();
                     var currIv = Math.Round(Perfect(pokemon));
-                    //listViewItem.SubItems.Add();
                     listViewItem.ImageKey = pokemon.PokemonId.ToString();
 
                     var pokemonId2 = pokemon.PokemonId;
@@ -125,7 +124,7 @@ namespace PokemonGo.RocketAPI.Console
 
                     listView1.Items.Add(listViewItem);
                 }
-                Text = "Pokemon List | User: " + profile.Profile.Username + " | Pokemons: " + pokemons.Count() + "/" + profile.Profile.PokeStorage;
+                Text = "Pokemon Übersicht | Nutzer: " + profile.Profile.Username + " | Pokemon: " + pokemons.Count() + "/" + profile.Profile.PokeStorage;
                 EnabledButton(true);
 
                 textBox1.Text = string.Empty;
@@ -202,7 +201,7 @@ namespace PokemonGo.RocketAPI.Console
                 {
                     if (listView1.SelectedItems.Count > 1)
                     {
-                        MessageBox.Show("You can only select 1 item for quick action!", "Selection to large", MessageBoxButtons.OK);
+                        MessageBox.Show("Du kannst nur 1 Objekt für das Quick-Menu nutzen!", "Auswahl zu groß", MessageBoxButtons.OK);
                         return;
                     }
                     contextMenuStrip1.Show(Cursor.Position);
@@ -215,7 +214,7 @@ namespace PokemonGo.RocketAPI.Console
             var pokemon = (PokemonData)listView1.SelectedItems[0].Tag;
             taskResponse resp = new taskResponse(false, string.Empty);
 
-            if (MessageBox.Show(this, pokemon.PokemonId + " with " + pokemon.Cp + " CP thats " + Math.Round(Perfect(pokemon)) + "% perfect", "Are you sure you want to transfer?", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (MessageBox.Show(this, pokemon.PokemonId + " mit " + pokemon.Cp + " CP, das bedeutet " + Math.Round(Perfect(pokemon)) + "% perfekt", "Sicher das du es transferieren willst?", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 resp = await transferPokemon(pokemon);
             }
@@ -226,10 +225,10 @@ namespace PokemonGo.RocketAPI.Console
             if (resp.Status)
             {
                 listView1.Items.Remove(listView1.SelectedItems[0]);
-                Text = "Pokemon List | User: " + profile.Profile.Username + " | Pokemons: " + listView1.Items.Count + "/" + profile.Profile.PokeStorage;
+                Text = "Pokemon Übersicht | Nutzer: " + profile.Profile.Username + " | Pokemon: " + listView1.Items.Count + "/" + profile.Profile.PokeStorage;
             }
             else
-                MessageBox.Show(resp.Message +" transfer failed!", "Transfer Status", MessageBoxButtons.OK);
+                MessageBox.Show(resp.Message +" transfer fehlgeschlagen!", "Transfer Status", MessageBoxButtons.OK);
         }
 
         private async void button2_Click(object sender, EventArgs e)
@@ -251,9 +250,9 @@ namespace PokemonGo.RocketAPI.Console
             }
 
             if (failed != string.Empty)
-                MessageBox.Show("Succesfully evolved " + evolved + "/" + total + " Pokemons. Failed: " + failed, "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Erfolgreich entwickelt: " + evolved + "/" + total + " Pokemon. Fehlgeschlagen: " + failed, "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show("Succesfully evolved " + evolved + "/" + total + " Pokemons.", "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Erfolgreich entwickelt: " + evolved + "/" + total + " Pokemon.", "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
             listView1.Clear();
             Execute();
         }
@@ -281,10 +280,10 @@ namespace PokemonGo.RocketAPI.Console
             }
 
             if(failed != string.Empty)
-                MessageBox.Show("Succesfully transfered " + transfered + "/" + total + " Pokemons. Failed: " + failed, "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Erfolgreich Transferiert: " + transfered + "/" + total + " Pokemon. Fehlgeschlagen: " + failed, "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show("Succesfully transfered " + transfered + "/" + total + " Pokemons.", "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Text = "Pokemon List | User: " + profile.Profile.Username + " | Pokemons: " + listView1.Items.Count + "/" + profile.Profile.PokeStorage;
+                MessageBox.Show("Erfolgreich Transferiert: " + transfered + "/" + total + " Pokemon.", "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Text = "Pokemon Übersicht | Nutzer: " + profile.Profile.Username + " | Pokemon: " + listView1.Items.Count + "/" + profile.Profile.PokeStorage;
             EnabledButton(true);
             //listView1.Clear();
             //Execute();
@@ -308,9 +307,9 @@ namespace PokemonGo.RocketAPI.Console
                     failed += resp.Message + " ";
             }
             if (failed != string.Empty)
-                MessageBox.Show("Succesfully powered up " + powerdup + "/" + total + " Pokemons. Failed: " + failed, "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Erfolgreich geboostet: " + powerdup + "/" + total + " Pokemon. Fehlgeschlagen: " + failed, "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show("Succesfully powered up " + powerdup + "/" + total + " Pokemons.", "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Erfolgreich geboostet: " + powerdup + "/" + total + " Pokemon.", "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
             listView1.Clear();
             Execute();
         }
@@ -410,7 +409,7 @@ namespace PokemonGo.RocketAPI.Console
             var pokemon = (PokemonData)listView1.SelectedItems[0].Tag;
             taskResponse resp = new taskResponse(false, string.Empty);
 
-            if (MessageBox.Show(this, pokemon.PokemonId + " with " + pokemon.Cp + " CP thats " + Math.Round(Perfect(pokemon)) + "% perfect", "Are you sure you want to evolve?", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (MessageBox.Show(this, pokemon.PokemonId + " mit " + pokemon.Cp + " CP, das bedeutet " + Math.Round(Perfect(pokemon)) + "% perfekt", "Willst du es wirklich entwickeln?", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 resp = await evolvePokemon(pokemon);
             }
@@ -424,7 +423,7 @@ namespace PokemonGo.RocketAPI.Console
                 Execute();
             }
             else
-                MessageBox.Show(resp.Message + " evolving failed!", "Evolve Status", MessageBoxButtons.OK);
+                MessageBox.Show(resp.Message + " Entwickeln fehlgeschlagen!", "Entwicklungsstatus", MessageBoxButtons.OK);
         }
 
         private async void powerUpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -432,7 +431,7 @@ namespace PokemonGo.RocketAPI.Console
             var pokemon = (PokemonData)listView1.SelectedItems[0].Tag;
             taskResponse resp = new taskResponse(false, string.Empty);
 
-            if (MessageBox.Show(this, pokemon.PokemonId + " with " + pokemon.Cp + " CP thats " + Math.Round(Perfect(pokemon)) + "% perfect", "Are you sure you want to power it up?", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (MessageBox.Show(this, pokemon.PokemonId + " mit " + pokemon.Cp + " CP, das bedeutet " + Math.Round(Perfect(pokemon)) + "% perfekt", "Möchtest du es wirklich Boosten?", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 resp = await PowerUp(pokemon);
             }
@@ -446,7 +445,7 @@ namespace PokemonGo.RocketAPI.Console
                 Execute();
             }
             else
-                MessageBox.Show(resp.Message + " powering up failed!", "PowerUp Status", MessageBoxButtons.OK);
+                MessageBox.Show(resp.Message + " Boosting fehlgeschlagen!", "Boosting Status", MessageBoxButtons.OK);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -461,7 +460,7 @@ namespace PokemonGo.RocketAPI.Console
                 }
                 if (def < 30 || def > 3600)
                 {
-                    MessageBox.Show("Interval has to be between 30 and 3600 seconds!");
+                    MessageBox.Show("Interval muss zwischen 30 und 3600 Sekunden betragen!");
                     textBox2.Text = "60";
                     checkBox1.Checked = false;
                 }
