@@ -99,7 +99,7 @@ namespace PokemonGo.RocketAPI.Console
         {
             if (close)
             {
-                var result = MessageBox.Show("You didn't set start location! Are you sure you want to exit this window?", "Location selector", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var result = MessageBox.Show("Du hast keine Start Location gewählt! Möchtest du dieses Fenster wirklich schließen?", "Location Auswahl", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.No || result == DialogResult.Abort)
                 {
                     e.Cancel = true;
@@ -125,7 +125,7 @@ namespace PokemonGo.RocketAPI.Console
                 {
                     double lat = double.Parse(textBox1.Text.Replace(',', '.'), GUI.cords, System.Globalization.NumberFormatInfo.InvariantInfo);
                     if (lat > 90.0 || lat < -90.0)
-                        throw new System.ArgumentException("Value has to be between 180 and -180!");
+                        throw new System.ArgumentException("Wert muss zwischen 180 und -180 liegen!");
                     map.Position = new GMap.NET.PointLatLng(lat, map.Position.Lng);
                 }
                 catch (Exception ex)
@@ -144,7 +144,7 @@ namespace PokemonGo.RocketAPI.Console
                 {
                     double lng = double.Parse(textBox2.Text.Replace(',', '.'), GUI.cords, System.Globalization.NumberFormatInfo.InvariantInfo);
                     if (lng > 180.0 || lng < -180.0)
-                        throw new System.ArgumentException("Value has to be between 90 and -90!");
+                        throw new System.ArgumentException("Wert muss zwischen 90 und -90 liegen!");
                     map.Position = new GMap.NET.PointLatLng(map.Position.Lat, lng);
                 }
                 catch (Exception ex)

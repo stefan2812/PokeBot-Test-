@@ -114,7 +114,7 @@ namespace PokemonGo.RocketAPI.Console
                     var pokemonName = pokemon.Id;
 
                     listViewItem.Text = string.Format("{0}\n{1} CP", pokemon.PokemonId, pokemon.Cp);
-                    listViewItem.ToolTipText = currentCandy + " Candy\n" + currIv + "% IV";
+                    listViewItem.ToolTipText = currentCandy + " Bonbons\n" + currIv + "% IV";
 
                     var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
                     var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
@@ -280,9 +280,9 @@ namespace PokemonGo.RocketAPI.Console
             }
 
             if(failed != string.Empty)
-                MessageBox.Show("Erfolgreich Transferiert: " + transfered + "/" + total + " Pokemon. Fehlgeschlagen: " + failed, "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Erfolgreich transferiert: " + transfered + "/" + total + " Pokemon. Fehlgeschlagen: " + failed, "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show("Erfolgreich Transferiert: " + transfered + "/" + total + " Pokemon.", "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Erfolgreich transferiert: " + transfered + "/" + total + " Pokemon.", "Transfer status", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Text = "Pokemon Übersicht | Nutzer: " + profile.Profile.Username + " | Pokemon: " + listView1.Items.Count + "/" + profile.Profile.PokeStorage;
             EnabledButton(true);
             //listView1.Clear();

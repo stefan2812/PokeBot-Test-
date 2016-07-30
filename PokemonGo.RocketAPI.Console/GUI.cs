@@ -32,27 +32,17 @@ namespace PokemonGo.RocketAPI.Console
             if (comboBox1.SelectedIndex == 0)
             {
                 label2.Text = "E-mail:";
-            //    textBox1.Hide();
-            //    label2.Hide();
-            //    textBox2.Hide();
-            //    label3.Hide();
             }
             else
             {
                 label2.Text = "Username:";
-            //    textBox1.Show();
-            //    label2.Show();
-            //    textBox2.Show();
-            //    label3.Show();
             }
         }
 
         private void GUI_Load(object sender, EventArgs e)
         {
-
             // Create missing Files
             System.IO.Directory.CreateDirectory(Program.path); 
-
             // Version Infoooo
             groupBox9.Text = "Your Version: " + Assembly.GetExecutingAssembly().GetName().Version + " | Newest: " + Program.getNewestVersion();
             if (Program.getNewestVersion() > Assembly.GetExecutingAssembly().GetName().Version)
@@ -64,7 +54,6 @@ namespace PokemonGo.RocketAPI.Console
                 }
                 else if (dialogResult == DialogResult.No)
                 {
-                    //nothing   
                 } 
             }
 
@@ -135,15 +124,6 @@ namespace PokemonGo.RocketAPI.Console
                         case 12:
                             checkBox3.Checked = bool.Parse(line);
                             break;
-                        case 14:
-                            textBox18.Text = line;
-                            break;
-                        case 15:
-                            textBox19.Text = line;
-                            break;
-                        case 16:
-                            textBox20.Text = line;
-                            break;
                         case 17:
                             break;
                         case 18:
@@ -182,7 +162,6 @@ namespace PokemonGo.RocketAPI.Console
                 textBox7.Text = "5000";
                 textBox8.Text = "3";
                 textBox9.Text = "999";
-                textBox20.Text = "5000";
             }
 
             if (File.Exists(Program.items))
@@ -441,20 +420,6 @@ namespace PokemonGo.RocketAPI.Console
             }
             else
                 Globals.berry = int.Parse(textBox17.Text);
-
-            if (textBox18.Text != "")
-                Globals.telAPI = textBox18.Text;
-
-            if (textBox19.Text != "")
-                Globals.telName = textBox19.Text;
-
-            if (textBox20.Text == "")
-            {
-                textBox20.BackColor = Color.Red;
-                return;
-            }
-            else
-                Globals.telDelay = int.Parse(textBox20.Text);
 
             if (textBox21.Text == "")
             {

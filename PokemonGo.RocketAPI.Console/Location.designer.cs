@@ -118,6 +118,7 @@
             // 
             // button1
             // 
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button1.Location = new System.Drawing.Point(589, 483);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(133, 23);
@@ -130,6 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlText;
             this.ClientSize = new System.Drawing.Size(734, 511);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
@@ -139,6 +141,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.map);
+            this.ForeColor = System.Drawing.Color.Cyan;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "LocationSelect";
